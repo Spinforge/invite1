@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Little St. James • $INVITE — Invitation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Special+Elite&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #000000;
+      --text: #e0e0e0;
+      --white: #ffffff;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html, body { height:100%; background:var(--bg); color:var(--text); font-family:'Special Elite', cursive; overflow-x:hidden; }
+    body { background:#000; position:relative; }
+
+    body::before {
+      content:''; position:fixed; inset:0; pointer-events:none;
+      background: radial-gradient(circle at 50% 30%, transparent 25%, #000 70%);
+      opacity:0.8; z-index:1;
+    }
+
+    body::after {
+      content:''; position:fixed; inset:0; pointer-events:none; z-index:9998;
+      background: repeating-linear-gradient(transparent 0px, transparent 2px, rgba(0,0,0,0.12) 2px, rgba(0,0,0,0.12) 4px),
+                  url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="4"/><feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.14 0"/></filter><rect width="100%" height="100%" filter="url(%23n)"/></svg>');
+      opacity:0.16; animation: grain 12s steps(10) infinite;
+    }
+
+    @keyframes grain {
+      0%,100% { transform:translate(0,0); }
+      10% { transform:translate(-2px,-2px); }
+      30% { transform:translate(2px,1px); }
+      60% { transform:translate(-1px,2px); }
+      80% { transform:translate(1.5px,-1.5px); }
+    }
+
+    .cursor-none { cursor:none; }
+
+    .custom-cursor {
+      position:fixed; width:26px; height:26px; border:1px solid #fff; border-radius:50%;
+      pointer-events:none; transform:translate(-50%,-50%); transition:all 0.12s linear; z-index:9999;
+      box-shadow:0 0 20px rgba(255,255,255,0.4); mix-blend-mode:difference;
+    }
+    .custom-cursor.grow { width:80px; height:80px; background:rgba(255,255,255,0.08); border-color:transparent; box-shadow:0 0 70px rgba(255,255,255,0.6); }
+
+    header {
+      min-height:100vh; position:relative; display:flex; flex-direction:column; align-items:center; justify-content:flex-start;
+      text-align:center; padding:6vh 0 10vh;
+    }
+
+    .floating-card-container {
+      position:relative; width:380px; max-width:85vw; aspect-ratio:9 / 14;
+      margin:0 auto 6vh; perspective:1800px; z-index:2;
+      animation:floatEvil 22s ease-in-out infinite;
+    }
+
+    @keyframes floatEvil {
+      0%,100% { transform:translateY(0) rotateX(4deg) rotateY(-5deg) rotateZ(0.5deg); }
+      50%     { transform:translateY(-50px) rotateX(-4deg) rotateY(5deg) rotateZ(-0.5deg); }
+    }
+
+    .floating-card {
+      width:100%; height:100%; object-fit:contain;
+      filter:grayscale(100%) contrast(130%) brightness(0.95);
+      border-radius:24px; box-shadow:0 40px 120px rgba(0,0,0,0.95), 0 0 80px rgba(255,255,255,0.15), inset 0 0 60px rgba(0,0,0,0.6);
+      animation:pulseGlow 10s ease-in-out infinite alternate; transform:translateZ(50px);
+    }
+
+    @keyframes pulseGlow {
+      0%   { box-shadow:0 40px 120px rgba(0,0,0,0.95), 0 0 80px rgba(255,255,255,0.08); }
+      100% { box-shadow:0 40px 120px rgba(0,0,0,0.95), 0 0 140px rgba(255,255,255,0.25); }
+    }
+
+    .content {
+      max-width:960px; padding:0 5vw; text-align:center; z-index:3;
+    }
+
+    h1 {
+      font-family:'Cinzel Decorative', cursive; font-size:clamp(5rem,12vw,14rem);
+      letter-spacing:0.6em; color:transparent;
+      background:linear-gradient(90deg, #fff, #ccc, #fff); -webkit-background-clip:text; background-clip:text;
+      text-shadow:0 0 60px rgba(255,255,255,0.35); animation:flicker 10s infinite alternate;
+    }
+
+    @keyframes flicker {
+      0%,19%,21%,23%,25%,54%,56%,100% { text-shadow:0 0 60px rgba(255,255,255,0.35); opacity:1; }
+      20%,24%,55% { text-shadow:none; opacity:0.4; }
+    }
+
+    .ticker {
+      font-size:clamp(3rem,8vw,6.5rem); font-weight:bold; color:#fff;
+      letter-spacing:0.6em; margin:1.5rem 0 2.5rem; text-shadow:0 0 40px rgba(255,255,255,0.5);
+      animation:breathe 14s infinite ease-in-out;
+    }
+
+    @keyframes breathe {
+      0%,100% { opacity:0.85; transform:scale(1); }
+      50%     { opacity:1;   transform:scale(1.03); }
+    }
+
+    .subtitle {
+      font-family:'Playfair Display', serif; font-style:italic; font-size:clamp(2.2rem,6vw,4rem);
+      margin:2rem 0 3rem; opacity:0; transform:translateY(80px);
+      transition:all 2.2s cubic-bezier(0.16,1,0.3,1); letter-spacing:0.15em;
+    }
+    .subtitle.visible { opacity:0.9; transform:translateY(0); }
+
+    .invitation-text {
+      font-size:1.5rem; letter-spacing:0.2em; line-height:2.1; max-width:860px; margin:0 auto 4rem;
+      opacity:0.85;
+    }
+
+    .highlight { color:#fff; font-weight:bold; text-shadow:0 0 30px rgba(255,255,255,0.6); }
+
+    .action-area {
+      margin-top:4rem; display:flex; flex-wrap:wrap; justify-content:center; gap:3rem; align-items:center;
+    }
+
+    .evil-btn {
+      padding:1.2rem 3.5rem; font-size:1.4rem; letter-spacing:0.3em; color:#fff;
+      border:2px solid #fff; background:transparent; cursor:pointer; position:relative; overflow:hidden;
+      transition:all 0.5s ease; font-family:'Cinzel Decorative', cursive; text-transform:uppercase;
+    }
+
+    .evil-btn:hover {
+      color:#000; background:#fff; box-shadow:0 0 60px rgba(255,255,255,0.7);
+      transform:translateY(-4px); animation:glitchBtn 0.4s infinite;
+    }
+
+    @keyframes glitchBtn {
+      0% { transform:translate(0); }
+      20% { transform:translate(-2px,2px); }
+      40% { transform:translate(2px,-2px); }
+      60% { transform:translate(-1px,1px); }
+      80% { transform:translate(1px,-1px); }
+      100% { transform:translate(0); }
+    }
+
+    .ca-display {
+      font-family: monospace;
+      font-size: 1.3rem;
+      letter-spacing: 0.1em;
+      color: #ccc;
+      background: rgba(255,255,255,0.05);
+      padding: 1rem 1.5rem;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 8px;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .footer-note {
+      position:absolute; bottom:5vh; left:50%; transform:translateX(-50%);
+      font-size:1.2rem; opacity:0.45; letter-spacing:0.4em; z-index:3;
+    }
+
+    @media (max-width:900px) {
+      .floating-card-container { width:320px; margin-bottom:5vh; }
+      .action-area { flex-direction:column; gap:2rem; }
+      .ca-display { font-size:1.1rem; padding:0.8rem 1.2rem; }
+    }
+  </style>
+</head>
+<body class="cursor-none">
+
+  <div class="custom-cursor"></div>
+
+  <header>
+    <div class="floating-card-container">
+      <img 
+        src="https://cdn.discordapp.com/attachments/675731468353404965/1469313840234893335/card.png?ex=698734a6&is=6985e326&hm=62865e11cca95fbc99088888a7d1f26fbb6762e644fc261307f9a3bd0bc533d0&" 
+        alt="Epstein Island Invitation Card" 
+        class="floating-card"
+      >
+    </div>
+
+    <div class="action-area">
+      <button class="evil-btn" onclick="window.open('https://x.com/i/communities/2017789479650545803', '_blank')">
+        JOIN X COMMUNITY
+      </button>
+
+      <div class="ca-display">
+        CA: Fh4wLStHfdwSfyWQXBDSUgnP6XoWXFfae12KP1s6EPSj
+      </div>
+    </div>
+
+    <div class="content">
+      
+      <div class="ticker">$INVITE</div>
+
+      <div class="subtitle">Epstein Island Invitation</div>
+
+      <div class="invitation-text">
+        Access restricted to verified <span class="highlight">$INVITE</span> holders only.<br><br>
+        No logs. No witnesses. No return.<br>
+        Discretion is enforced. Survival is not guaranteed.
+      </div>
+    </div>
+
+    <div class="footer-note">
+      CLASSIFIED • DESTROY AFTER VIEWING • NO ESCAPE
+    </div>
+  </header>
+
+  <script>
+    // custom cursor
+    const cursor = document.querySelector('.custom-cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top  = e.clientY + 'px';
+    });
+
+    // reveal subtitle
+    setTimeout(() => {
+      document.querySelector('.subtitle').classList.add('visible');
+    }, 1200);
+  </script>
+</body>
+</html>
